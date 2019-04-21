@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="springboot.librarybook.dao.category.CategoryMapperExt" >
+    <resultMap id="BaseResultMap" type="springboot.librarybook.entity.category.Category" >
+        <result column="categoryId" property="categoryid" jdbcType="INTEGER" />
+        <result column="categoryName" property="categoryname" jdbcType="VARCHAR" />
+        <result column="secondCatId" property="secondcatid" jdbcType="INTEGER" />
+        <result column="secondCatName" property="secondcatname" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    categoryId, categoryName, secondCatId, secondCatName
+  </sql>
+    <select id="getCategories" parameterType="map"  resultMap="BaseResultMap">
+    <![CDATA[
+        SELECT  *  FROM   category order by categoryId;
+     ]]>
+    </select>
+</mapper>
