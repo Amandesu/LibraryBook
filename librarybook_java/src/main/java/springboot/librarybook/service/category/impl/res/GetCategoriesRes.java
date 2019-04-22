@@ -1,9 +1,7 @@
 package springboot.librarybook.service.category.impl.res;
-
+import java.util.*;
 import springboot.librarybook.entity.category.Category;
 
-import javax.swing.*;
-import java.util.*;
 
 public class GetCategoriesRes {
     private int code;
@@ -15,24 +13,33 @@ public class GetCategoriesRes {
     }
     public GetCategoriesRes(List<Category> allList){
 
-        HashMap<Integer, Item> map =  new HashMap();
-        ArrayList catList = new ArrayList();
+        Map<Integer, List> map =  new HashMap();
+        List rootList = new ArrayList();   // 根节点
+
+
+
         for (Category cat:allList) {
-            int id = cat.getCategoryid();
-            if (map.get(id) == null) {
-                map.put(id,  createItem());
+            // 如果是根节点
+            if (cat.getParentid() == null) {
+                Item item = new Item();
+                item.setCategoryId(cat.getCategoryid());
+                item.setCategoryName(cat.getCategoryname());
+                item.setChildren(new ArrayList());
+                map.put(cat.getCategoryid(), item.getChildren());
+                rootList.add(item);
             }
-            Item item = map.get(id);
-            item.setCategoryId(cat.getCategoryid());
-            item.setCategoryName(cat.getCategoryname());
-            List list = item.getList();
-            list.add(new SecondCat(cat.getSecondcatid(), cat.getSecondcatname()));
-            item.setList(list);
         }
-        for (Map.Entry<Integer, Item> entry : map.entrySet()) {
-            catList.add(entry.getValue());
+
+        for (Category cat: allList) {
+            Object parentId = cat.getParentid();
+            List list = map.get(parentId);
+            if (parentId != null) {
+                list.add(cat);
+            }
         }
-        setBody(catList);
+        setBody(rootList);
+
+
     }
 
     public int getCode() {
@@ -77,7 +84,7 @@ public class GetCategoriesRes {
     public class Item {
         private  int categoryId;
         private  String categoryName;
-        private  List list = new ArrayList();
+        private  List children = new ArrayList();
 
         public int getCategoryId() {
             return categoryId;
@@ -95,12 +102,12 @@ public class GetCategoriesRes {
             this.categoryName = categoryName;
         }
 
-        public List getList() {
-            return list;
+        public List getChildren() {
+            return children;
         }
 
-        public void setList(List list) {
-            this.list = list;
+        public void setChildren(List children) {
+            this.children = children;
         }
     }
 

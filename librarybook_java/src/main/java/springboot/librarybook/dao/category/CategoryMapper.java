@@ -15,11 +15,8 @@ public interface CategoryMapper {
     int insertSelective(Category record);
 
     List<Category> selectByExample(CategoryCriteria example);
-    List<Category> getCategories(CategoryCriteria example);
 
     int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryCriteria example);
 
     int updateByExample(@Param("record") Category record, @Param("example") CategoryCriteria example);
-
-
 }

@@ -234,133 +234,63 @@ public class CategoryCriteria {
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidIsNull() {
-            addCriterion("secondCatId is null");
+        public Criteria andParentidIsNull() {
+            addCriterion("parentId is null");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidIsNotNull() {
-            addCriterion("secondCatId is not null");
+        public Criteria andParentidIsNotNull() {
+            addCriterion("parentId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidEqualTo(Integer value) {
-            addCriterion("secondCatId =", value, "secondcatid");
+        public Criteria andParentidEqualTo(Integer value) {
+            addCriterion("parentId =", value, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidNotEqualTo(Integer value) {
-            addCriterion("secondCatId <>", value, "secondcatid");
+        public Criteria andParentidNotEqualTo(Integer value) {
+            addCriterion("parentId <>", value, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidGreaterThan(Integer value) {
-            addCriterion("secondCatId >", value, "secondcatid");
+        public Criteria andParentidGreaterThan(Integer value) {
+            addCriterion("parentId >", value, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("secondCatId >=", value, "secondcatid");
+        public Criteria andParentidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("parentId >=", value, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidLessThan(Integer value) {
-            addCriterion("secondCatId <", value, "secondcatid");
+        public Criteria andParentidLessThan(Integer value) {
+            addCriterion("parentId <", value, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidLessThanOrEqualTo(Integer value) {
-            addCriterion("secondCatId <=", value, "secondcatid");
+        public Criteria andParentidLessThanOrEqualTo(Integer value) {
+            addCriterion("parentId <=", value, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidIn(List<Integer> values) {
-            addCriterion("secondCatId in", values, "secondcatid");
+        public Criteria andParentidIn(List<Integer> values) {
+            addCriterion("parentId in", values, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidNotIn(List<Integer> values) {
-            addCriterion("secondCatId not in", values, "secondcatid");
+        public Criteria andParentidNotIn(List<Integer> values) {
+            addCriterion("parentId not in", values, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidBetween(Integer value1, Integer value2) {
-            addCriterion("secondCatId between", value1, value2, "secondcatid");
+        public Criteria andParentidBetween(Integer value1, Integer value2) {
+            addCriterion("parentId between", value1, value2, "parentid");
             return (Criteria) this;
         }
 
-        public Criteria andSecondcatidNotBetween(Integer value1, Integer value2) {
-            addCriterion("secondCatId not between", value1, value2, "secondcatid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameIsNull() {
-            addCriterion("secondCatName is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameIsNotNull() {
-            addCriterion("secondCatName is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameEqualTo(String value) {
-            addCriterion("secondCatName =", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameNotEqualTo(String value) {
-            addCriterion("secondCatName <>", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameGreaterThan(String value) {
-            addCriterion("secondCatName >", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameGreaterThanOrEqualTo(String value) {
-            addCriterion("secondCatName >=", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameLessThan(String value) {
-            addCriterion("secondCatName <", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameLessThanOrEqualTo(String value) {
-            addCriterion("secondCatName <=", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameLike(String value) {
-            addCriterion("secondCatName like", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameNotLike(String value) {
-            addCriterion("secondCatName not like", value, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameIn(List<String> values) {
-            addCriterion("secondCatName in", values, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameNotIn(List<String> values) {
-            addCriterion("secondCatName not in", values, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameBetween(String value1, String value2) {
-            addCriterion("secondCatName between", value1, value2, "secondcatname");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondcatnameNotBetween(String value1, String value2) {
-            addCriterion("secondCatName not between", value1, value2, "secondcatname");
+        public Criteria andParentidNotBetween(Integer value1, Integer value2) {
+            addCriterion("parentId not between", value1, value2, "parentid");
             return (Criteria) this;
         }
     }

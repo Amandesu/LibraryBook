@@ -7,9 +7,7 @@ public class Category implements Serializable {
 
     private String categoryname;
 
-    private Integer secondcatid;
-
-    private String secondcatname;
+    private Integer parentid;
 
     private static final long serialVersionUID = 1L;
 
@@ -29,20 +27,12 @@ public class Category implements Serializable {
         this.categoryname = categoryname == null ? null : categoryname.trim();
     }
 
-    public Integer getSecondcatid() {
-        return secondcatid;
+    public Integer getParentid() {
+        return parentid;
     }
 
-    public void setSecondcatid(Integer secondcatid) {
-        this.secondcatid = secondcatid;
-    }
-
-    public String getSecondcatname() {
-        return secondcatname;
-    }
-
-    public void setSecondcatname(String secondcatname) {
-        this.secondcatname = secondcatname == null ? null : secondcatname.trim();
+    public void setParentid(Integer parentid) {
+        this.parentid = parentid;
     }
 
     @Override
@@ -53,8 +43,7 @@ public class Category implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", categoryid=").append(categoryid);
         sb.append(", categoryname=").append(categoryname);
-        sb.append(", secondcatid=").append(secondcatid);
-        sb.append(", secondcatname=").append(secondcatname);
+        sb.append(", parentid=").append(parentid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
