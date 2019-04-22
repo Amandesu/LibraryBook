@@ -57,10 +57,10 @@ class Header extends React.Component {
     getCatMenu = list => {
         return (
             <Menu theme="dark">
-                {list.map((sec) => {
-                    console.log(sec)
+                {list.map((sec, index) => {
+                   
                     return (
-                        <Menu.Item>
+                        <Menu.Item key={index}>
                             <a className="userCenterItem">{sec.categoryname}</a>
                         </Menu.Item>
                     )
@@ -77,8 +77,8 @@ class Header extends React.Component {
                 <div className="header">
                     <div className="left">
                         <div className="item">首页</div>
-                        { state.categories.map(cat => (
-                            <Dropdown overlay={this.getCatMenu(cat.children)} placement="bottomCenter">
+                        { state.categories.map((cat, index) => (
+                            <Dropdown overlay={this.getCatMenu(cat.children)} placement="bottomCenter" key={index}>
                                 <div className="item">{cat.categoryName}</div>
                             </Dropdown>
                         ))}
