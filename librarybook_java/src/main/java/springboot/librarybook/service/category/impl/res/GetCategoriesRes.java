@@ -15,9 +15,6 @@ public class GetCategoriesRes {
 
         Map<Integer, List> map =  new HashMap();
         List rootList = new ArrayList();   // 根节点
-
-
-
         for (Category cat:allList) {
             // 如果是根节点
             if (cat.getParentid() == null) {
@@ -29,7 +26,6 @@ public class GetCategoriesRes {
                 rootList.add(item);
             }
         }
-
         for (Category cat: allList) {
             Object parentId = cat.getParentid();
             List list = map.get(parentId);
@@ -38,7 +34,6 @@ public class GetCategoriesRes {
             }
         }
         setBody(rootList);
-
 
     }
 

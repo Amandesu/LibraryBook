@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Helmet } from "react-helmet";
 
 import {
-    Form, Icon, Input, Button, Checkbox, DatePicker, Select
+    Form, Icon, Input, Button, Checkbox, DatePicker, Select, Upload, message, Row, Col
 } from 'antd';
 import { callApi } from "Utils"
 import "./index.less";
@@ -25,19 +25,86 @@ class UploadBook extends React.Component {
 
     }
     state = {
-        cid:"",
-        categories:[]
-
+        categories:[],
+        secondCats:[],
+        fileList:[],
+        fileImgList:[],
+        downloadUrl:""
     }
     componentDidMount() {
-        callApi({
+        this.getCategories();
+    }
+    getCategories(){
+        return callApi({
             url:"/book/getCategories",
             type:"GET"
         }).then(res => {
             let categories = res.body || [];
-            console.log(categories[0].categoryId)
-            this.setState({categories, cid:categories[0].categoryId})
+            this.props.form.setFieldsValue({cid:categories[0].categoryId })
+            this.setState({categories}, this.getSecCatById)
         })
+    }
+    getSecCatById(){
+        callApi({
+            url:"/book/getSecCatById",
+            type:"GET",
+            data:{
+                id: this.props.form.getFieldValue("cid")
+            }
+        }).then(res => {
+            let secondCats = res.body || [];
+            this.props.form.setFieldsValue({sid:secondCats[0].categoryid })
+            this.setState({
+                secondCats: secondCats
+            })
+        })
+    }
+    getFileProps(){
+        return {
+            name: 'file',
+            action: '/upload/file',
+            headers: {
+              authorization: 'authorization-text',
+            },
+            onChange : (info) => {
+           
+                info.fileList = [].concat(info.fileList.pop());
+                
+                this.setState({ fileList:info.fileList });
+
+                if (info.file && info.file.status === 'done') {
+                    this.setState({ downloadUrl:info.file.response.url });
+                    this.props.form.setFieldsValue({ name:info.file.response.name });
+                }                 
+            }
+        };
+    }
+    getImageProps(){
+        return {
+            name: 'file',
+            action: '/upload/file',
+            headers: {
+              authorization: 'authorization-text',
+            },
+            listType:"picture-card",
+            onChange : (info) => {
+                console.log(info)
+                if (!info.fileList[0]) {
+                    info.fileList  = [];
+                } else {
+                    info.fileList = [].concat(info.fileList.pop());
+                }
+                this.setState({ fileImgList:info.fileList });
+
+                if (info.file && info.file.status === 'done') {
+                    this.setState({ downloadUrl:info.file.response.url });
+                    this.props.form.setFieldsValue({ name:info.file.response.name });
+                }                 
+            }
+        };
+    }
+    handleChange = cid => {
+        this.setState({cid}, this.getSecCatById)
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -45,19 +112,15 @@ class UploadBook extends React.Component {
             const forms = this.props.form.getFieldsValue();
         });
     }
-    handleChange = cid => {
-        this.setState({
-            cid
-        })
-    }
+    
     render() {
         const { state, props } = this;
         const getFieldDecorator = props.form.getFieldDecorator;
-
         const formItemLayout = { labelCol: { xs: { span: 24 }, sm: { span: 6 } }, wrapperCol: { xs: { span: 24 }, sm: { span: 18 }}};
+        const form = props.form;
         return (
             <div className={prefix}>
-                <Form onSubmit={this.handleSubmit} className="register-form" {...formItemLayout} layout='horizontal'>
+                <Form onSubmit={this.handleSubmit} className="uploadBook-form" {...formItemLayout} layout='horizontal'>
                     <Form.Item
                         label="书籍分类"
                     >
@@ -66,17 +129,76 @@ class UploadBook extends React.Component {
                                 required: true, message: '请输入书籍名称',
                             }]
                         })(
-                            <div>
                             
+                            <Select style={{ width: 300 }} onChange={this.handleChange}>
+                                {state.categories.map(cat => {
+                                    return (
+                                        <Option value={cat.categoryId} key={cat.categoryId}>{cat.categoryName}</Option>
+                                    )
+                                })}
+                            </Select>
                             
-                                <Select style={{ width: 300 }} onChange={this.handleChange} value={state.cid}>
-                                    {state.categories.map(cat => {
-                                        return (
-                                            <Option value={cat.categoryId} key={cat.categoryId}>{cat.categoryName}</Option>
-                                        )
-                                    })}
-                                </Select>
-                            </div>
+                        )}
+                    </Form.Item>
+                    <Form.Item
+                        label="二级分类"
+                    >
+                        {getFieldDecorator('sid', {
+    
+                            rules: [{
+                                required: true, message: '请输入书籍名称',
+                            }]
+                        })(
+                            <Select style={{ width: 300 }}>
+                                {state.secondCats.map(cat => {
+                                    return (
+                                        <Option value={cat.categoryid} key={cat.categoryid}>{cat.categoryname}</Option>
+                                    )
+                                })}
+                            </Select>
+                        )}
+                    </Form.Item>
+                    <Form.Item
+                        label="书籍上传"
+                    >
+                        
+                        <Upload {...this.getFileProps()} fileList={this.state.fileList}>
+                            <Button>
+                                <Icon type="upload" /> 上传
+                            </Button>
+                        </Upload>
+                        
+                    </Form.Item>
+                    <Form.Item
+                        label="上传封面图"
+                    >
+                        
+                        <Upload {...this.getImageProps()} fileList={this.state.fileImgList}>
+                        <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+                        </Upload>
+                        
+                    </Form.Item>
+                    {form.getFieldValue("name")?
+                    <Form.Item
+                        label="书籍名称"
+                    >
+                        {getFieldDecorator('name', {
+                            rules: [{
+                                required: true, message: '请输入书籍名称',
+                            }]
+                        })(
+                            <Input />
+                        )}
+                    </Form.Item>:""}
+                    <Form.Item label=" ">
+                    {getFieldDecorator('sumbit', {
+                        })(
+                            <Button type="primary" htmlType="submit" className="upload-book-submit">
+                            提交电子书
+                        </Button>
                         )}
                     </Form.Item>
                 </Form>

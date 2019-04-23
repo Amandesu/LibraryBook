@@ -107,7 +107,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="springboot.librarybook.entity.book.Book" >
-    insert into book (id, categoryName, categoryId, 
+    insert into book (id, categoryName, categoryId,
       name, collectCount, favoriteCount, 
       downloadLink, secondCatName, secondCatId, 
       createDate, score)

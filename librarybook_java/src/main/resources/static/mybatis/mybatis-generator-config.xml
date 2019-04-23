@@ -5,8 +5,10 @@
 <generatorConfiguration>
 
     <!-- 本地数据库驱动程序jar包的全路径 -->
+    <!--<classPathEntry
+            location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"/>-->
     <classPathEntry
-            location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"/>
+            location="/Users/leiwuyi456/.m2/repository/mysql/mysql-connector-java/8.0.15/mysql-connector-java-8.0.15.jar"/>
 
     <context id="context" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
@@ -35,7 +37,7 @@
                         connectionURL="jdbc:mysql://localhost:3306/librarybook?serverTimezone=GMT&amp;characterEncoding=UTF-8&amp;
                         characterSetResults=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;
                         nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true&amp;tinyInt1isBit=true"
-                        userId="root" password="root">
+                        userId="root" password="nima123456">
         </jdbcConnection>
 
 

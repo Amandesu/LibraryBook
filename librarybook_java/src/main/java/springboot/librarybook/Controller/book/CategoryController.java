@@ -9,6 +9,7 @@ import springboot.librarybook.service.category.CategoryService;
 import springboot.librarybook.service.category.impl.res.GetCategoriesRes;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -24,6 +25,15 @@ public class CategoryController {
         GetCategoriesRes list =  categoryService.getCategories();
 
         return  list;
+
+    }
+    // 获取二级类型
+    @RequestMapping(value = "getSecCatById", method = RequestMethod.GET)
+    public Map index(int id){
+
+        Map map =  categoryService.getSecCatById(id);
+
+        return  map;
 
     }
 }
